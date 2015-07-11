@@ -44,53 +44,55 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main2);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         mLongToast = Toast.makeText(this, "", Toast.LENGTH_LONG);
         mShortToast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
 
-        Button motorACon = (Button)findViewById(R.id.motorACon);
+        // BボタンのViewを取得
+        Button motorACon = (Button)findViewById(R.id.buttonB);
         motorACon.setOnClickListener(this);
-        Button motorACback = (Button)findViewById(R.id.motorACback);
-        motorACback.setOnClickListener(this);
-        Button motorACoff = (Button)findViewById(R.id.motorACoff);
+//        Button motorACback = (Button)findViewById(R.id.motorACback);
+//        motorACback.setOnClickListener(this);
+
+        // AボタンのViewを取得
+
+        Button motorACoff = (Button)findViewById(R.id.buttonA);
         motorACoff.setOnClickListener(this);
 
-        Button motorAon = (Button)findViewById(R.id.motorAon);
-        motorAon.setOnClickListener(this);
-        Button motorAoff = (Button)findViewById(R.id.motorAoff);
-        motorAoff.setOnClickListener(this);
+        // STARTボタンのViewを取得
+        Button startButton = (Button)findViewById(R.id.startButton);
+        startButton.setOnClickListener(this);
 
-        Button motorCon = (Button)findViewById(R.id.motorCon);
-        motorCon.setOnClickListener(this);
-        Button motorCoff = (Button)findViewById(R.id.motorCoff);
-        motorCoff.setOnClickListener(this);
+        // SELECTボタンのViewを取得
+        Button selectButton = (Button)findViewById(R.id.selectButton);
+        selectButton.setOnClickListener(this);
 
-        Button readColorSensor = (Button)findViewById(R.id.readColorSensor);
-        readColorSensor.setOnClickListener(this);
-        Button readTouchSensor = (Button)findViewById(R.id.readTouchSensor);
-        readTouchSensor.setOnClickListener(this);
-        Button readUSonicSensor = (Button)findViewById(R.id.readUltrasonicSensor);
-        readUSonicSensor.setOnClickListener(this);
+//        Button motorAon = (Button)findViewById(R.id.motorAon);
+//        motorAon.setOnClickListener(this);
+//        Button motorAoff = (Button)findViewById(R.id.motorAoff);
+//        motorAoff.setOnClickListener(this);
+//
+//        Button motorCon = (Button)findViewById(R.id.motorCon);
+//        motorCon.setOnClickListener(this);
+//        Button motorCoff = (Button)findViewById(R.id.motorCoff);
+//        motorCoff.setOnClickListener(this);
+//
+//        Button readColorSensor = (Button)findViewById(R.id.readColorSensor);
+//        readColorSensor.setOnClickListener(this);
+//        Button readTouchSensor = (Button)findViewById(R.id.readTouchSensor);
+//        readTouchSensor.setOnClickListener(this);
+//        Button readUSonicSensor = (Button)findViewById(R.id.readUltrasonicSensor);
+//        readUSonicSensor.setOnClickListener(this);
+//
+//        Button rotateByDegree = (Button)findViewById(R.id.rotatebydegree);
+//        rotateByDegree.setOnClickListener(this);
+//        Button rotateByTime = (Button)findViewById(R.id.rotatebytime);
+//        rotateByTime.setOnClickListener(this);
 
-        Button rotateByDegree = (Button)findViewById(R.id.rotatebydegree);
-        rotateByDegree.setOnClickListener(this);
-        Button rotateByTime = (Button)findViewById(R.id.rotatebytime);
-        rotateByTime.setOnClickListener(this);
-
-        NumberPicker speedPicker = (NumberPicker)findViewById(R.id.speedPicker);
-        speedPicker.setMaxValue(100);
-        speedPicker.setMinValue(0);
-        speedPicker.setValue(50);
-        NumberPicker degreePicker = (NumberPicker)findViewById(R.id.degreePicker);
-        degreePicker.setMaxValue(10);
-        degreePicker.setMinValue(0);
-        degreePicker.setValue(3);
-        NumberPicker timePicker = (NumberPicker)findViewById(R.id.timePicker);
-        timePicker.setMaxValue(10);
-        timePicker.setMinValue(0);
-        timePicker.setValue(3);
+//
+// (3);
     }
     @Override
     protected void onStart() {
@@ -301,22 +303,31 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        NumberPicker speedPicker = (NumberPicker)findViewById(R.id.speedPicker);
-        int speed = speedPicker.getValue();
-        NumberPicker degreePicker = (NumberPicker)findViewById(R.id.degreePicker);
-        int degree = degreePicker.getValue();
-        NumberPicker timePicker = (NumberPicker)findViewById(R.id.timePicker);
-        int time = timePicker.getValue();
+//        NumberPicker speedPicker = (NumberPicker)findViewById(R.id.speedPicker);
+//        int speed = speedPicker.getValue();
+        int speed = 50;
+//        NumberPicker degreePicker = (NumberPicker)findViewById(R.id.degreePicker);
+//        int degree = degreePicker.getValue();
+        int degree = 50;
+//        NumberPicker timePicker = (NumberPicker)findViewById(R.id.timePicker);
+//        int time = timePicker.getValue();
+        int time = 50;
 
         switch (v.getId()) {
-            case R.id.motorACon:
+            case R.id.buttonB:
                 goForward(speed);
                 break;
             case R.id.motorACback:
                 goBackward(speed);
                 break;
-            case R.id.motorACoff:
+            case R.id.buttonA:
                 stopMove();
+                break;
+            // TODO startボタン処理
+            case R.id.startButton:
+                break;
+            // TODO selectボタン処理
+            case R.id.selectButton:
                 break;
             case R.id.motorAon:
                 motorAon(speed);
