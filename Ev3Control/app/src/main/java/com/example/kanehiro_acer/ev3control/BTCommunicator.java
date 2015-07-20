@@ -67,9 +67,9 @@ public class BTCommunicator extends Thread
 
     private Handler uiHandler;
     private String mMACaddress;
-    private MainActivity myMainActivity;
+    private MainFragmentActivity myMainActivity;
 
-    public BTCommunicator(MainActivity myMainAct, Handler uiHandler, BluetoothAdapter btAdapter) {
+    public BTCommunicator(MainFragmentActivity myMainAct, Handler uiHandler, BluetoothAdapter btAdapter) {
         this.myMainActivity = myMainAct;
         this.uiHandler = uiHandler;
         this.btAdapter = btAdapter;
@@ -225,6 +225,24 @@ public class BTCommunicator extends Thread
 
     }
 
+    private void moveMotorBC(int speed) {
+        byte[] message = new byte[11];
+
+        message[0] = DIRECT_COMMAND_NOREPLY;
+        message[1] = 0x00;
+        message[2] = 0x00;
+        message[3] = OP_OUTPUT_SPEED;       // 0xA5
+        message[4] = LAYER_MASTER;
+        message[5] = MOTOR_B+MOTOR_C;
+        message[6] = (byte)0x81;
+        message[7] = (byte)speed;           // speed 1 to 100
+        message[8] = OP_OUTPUT_START;       // 0xA6
+        message[9] = LAYER_MASTER;
+        message[10] = MOTOR_B+MOTOR_C;
+        sendMessage(message);
+
+    }
+
     private void moveBackwardMotorAC(int speed) {
         byte[] message = new byte[11];
         message[0] = DIRECT_COMMAND_NOREPLY;
@@ -241,6 +259,23 @@ public class BTCommunicator extends Thread
         sendMessage(message);
 
     }
+
+    private void moveBackwardMotorBC(int speed) {
+        byte[] message = new byte[11];
+        message[0] = DIRECT_COMMAND_NOREPLY;
+        message[1] = 0x00;
+        message[2] = 0x00;
+        message[3] = OP_OUTPUT_SPEED;       // 0xA5
+        message[4] = LAYER_MASTER;
+        message[5] = MOTOR_B+MOTOR_C;
+        message[6] = (byte)0x81;
+        message[7] = (byte)-speed;        // speed -1 to -100
+        message[8] = OP_OUTPUT_START;       // 0xA6
+        message[9] = LAYER_MASTER;
+        message[10] = MOTOR_B+MOTOR_C;
+        sendMessage(message);
+
+    }
     private void stopMotorAC() {
         byte[] message = new byte[7];
 
@@ -250,6 +285,20 @@ public class BTCommunicator extends Thread
         message[3] = OP_OUTPUT_STOP;
         message[4] = LAYER_MASTER;
         message[5] = MOTOR_A+MOTOR_C;
+        message[6] = 1;            // break
+        sendMessage(message);
+
+    }
+
+    private void stopMotorBC() {
+        byte[] message = new byte[7];
+
+        message[0] = DIRECT_COMMAND_NOREPLY;
+        message[1] = 0x00;
+        message[2] = 0x00;
+        message[3] = OP_OUTPUT_STOP;
+        message[4] = LAYER_MASTER;
+        message[5] = MOTOR_B+MOTOR_C;
         message[6] = 1;            // break
         sendMessage(message);
 
@@ -271,6 +320,23 @@ public class BTCommunicator extends Thread
 
     }
 
+    private void moveMotorB(int speed) {
+        byte[] message = new byte[11];
+        message[0] = DIRECT_COMMAND_NOREPLY;
+        message[1] = 0x00;
+        message[2] = 0x00;
+        message[3] = OP_OUTPUT_SPEED;       // 0xA5
+        message[4] = LAYER_MASTER;
+        message[5] = MOTOR_B;
+        message[6] = (byte)0x81;
+        message[7] = (byte)speed;            // speed
+        message[8] = OP_OUTPUT_START;       // 0xA6
+        message[9] = LAYER_MASTER;
+        message[10] = MOTOR_B;
+        sendMessage(message);
+
+    }
+
     private void stopMotorA() {
         byte[] message = new byte[7];
         message[0] = DIRECT_COMMAND_NOREPLY;
@@ -282,6 +348,19 @@ public class BTCommunicator extends Thread
         message[6] = 1;            // break
         sendMessage(message);
     }
+
+    private void stopMotorB() {
+        byte[] message = new byte[7];
+        message[0] = DIRECT_COMMAND_NOREPLY;
+        message[1] = 0x00;
+        message[2] = 0x00;
+        message[3] = OP_OUTPUT_STOP;
+        message[4] = LAYER_MASTER;
+        message[5] = MOTOR_B;
+        message[6] = 1;            // break
+        sendMessage(message);
+    }
+
     private void moveMotorC(int speed) {
         byte[] message = new byte[11];
         message[0] = DIRECT_COMMAND_NOREPLY;
@@ -545,13 +624,15 @@ public class BTCommunicator extends Thread
 
             switch (myMessage.getData().getInt("message")) {
                 case ROTATE_MOTOR_A:
-                    moveMotorA(myMessage.getData().getInt("value1"));
+//                    moveMotorA(myMessage.getData().getInt("value1"));
+                    moveMotorB(myMessage.getData().getInt("value1"));
                     break;
                 case ROTATE_MOTOR_C:
                     moveMotorC(myMessage.getData().getInt("value1"));
                     break;
                 case STOP_MOTOR_A:
-                    stopMotorA();
+//                    stopMotorA();
+                    stopMotorB();
                     break;
                 case STOP_MOTOR_C:
                     stopMotorC();
@@ -572,10 +653,12 @@ public class BTCommunicator extends Thread
                     UltrasonicSensor(myMessage.getData().getInt("value1"));
                     break;
                 case GO_FORWARD:
-                    moveMotorAC(myMessage.getData().getInt("value1"));
+//                    moveMotorAC(myMessage.getData().getInt("value1"));
+                    moveMotorBC(myMessage.getData().getInt("value1"));
                     break;
                 case GO_BACKWARD:
-                    moveBackwardMotorAC(myMessage.getData().getInt("value1"));
+//                    moveBackwardMotorAC(myMessage.getData().getInt("value1"));
+                    moveBackwardMotorBC(myMessage.getData().getInt("value1"));
                     break;
                 case GO_FORWARD_DEGREE:
                     moveMotorACbyDegree(myMessage.getData().getInt("value1"), myMessage.getData().getInt("value2"));
@@ -584,7 +667,8 @@ public class BTCommunicator extends Thread
                     moveMotorACbyTime(myMessage.getData().getInt("value1"), myMessage.getData().getInt("value2"));
                     break;
                 case STOP_MOVE:
-                    stopMotorAC();
+//                    stopMotorAC();
+                    stopMotorBC();
                     break;
                 case DISCONNECT:
                     destroyEV3connection();

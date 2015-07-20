@@ -26,7 +26,7 @@ public class MyAlertDialogFragment extends DialogFragment {
                 .setPositiveButton("OK",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
-                                ((MainActivity)getActivity()).doPositiveClick();
+                                ((MainFragmentActivity)getActivity()).doPositiveClick();
                             }
                         }
                 )

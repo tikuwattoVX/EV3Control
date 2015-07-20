@@ -1,5 +1,6 @@
 package com.example.kanehiro_acer.ev3control;
 
+
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.ProgressDialog;
@@ -8,19 +9,31 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.kanehiro_acer.ev3control.fragment.CustomControllerFragment;
+import com.example.kanehiro_acer.ev3control.fragment.NormalControllerFragment;
+import com.example.kanehiro_acer.ev3control.fragment.SuperControllerFragment;
 
-public class MainActivity extends ActionBarActivity implements View.OnClickListener {
+/**
+ * Created by masakisakamoto on 2015/07/12.
+ */
+public class MainFragmentActivity extends FragmentActivity {
+
+    ViewPager viewPager;
+    MainPagerAdapter adapter;
+
     private static final int REQUEST_CONNECT_DEVICE = 1000; // 識別用
     private static final int REQUEST_ENABLE_BT = 2000;
     public static final int MENU_TOGGLE_CONNECT = Menu.FIRST;
@@ -41,33 +54,46 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     private Toast mLongToast;
     private Toast mShortToast;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.fragment_activity_main);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         mLongToast = Toast.makeText(this, "", Toast.LENGTH_LONG);
         mShortToast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
 
+        findViews();
+
+        // adapterのインスタンスを取得する処理
+        adapter = new MainPagerAdapter(getSupportFragmentManager());
+
+        // ViewPagerにadapterをセットする処理
+        viewPager.setAdapter(adapter);
+    }
+
+    private void findViews() {
+        viewPager = (ViewPager) findViewById(R.id.viewPager);
+
         // BボタンのViewを取得
-        Button motorACon = (Button)findViewById(R.id.buttonB);
-        motorACon.setOnClickListener(this);
+//        Button motorACon = (Button)findViewById(R.id.buttonB);
+//        motorACon.setOnClickListener(this);
 //        Button motorACback = (Button)findViewById(R.id.motorACback);
 //        motorACback.setOnClickListener(this);
 
         // AボタンのViewを取得
 
-        Button motorACoff = (Button)findViewById(R.id.buttonA);
-        motorACoff.setOnClickListener(this);
+//        Button motorACoff = (Button)findViewById(R.id.buttonA);
+//        motorACoff.setOnClickListener(this);
 
         // STARTボタンのViewを取得
-        Button startButton = (Button)findViewById(R.id.startButton);
-        startButton.setOnClickListener(this);
+//        Button startButton = (Button)findViewById(R.id.startButton);
+//        startButton.setOnClickListener(this);
 
         // SELECTボタンのViewを取得
-        Button selectButton = (Button)findViewById(R.id.selectButton);
-        selectButton.setOnClickListener(this);
+//        Button selectButton = (Button)findViewById(R.id.selectButton);
+//        selectButton.setOnClickListener(this);
 
 //        Button motorAon = (Button)findViewById(R.id.motorAon);
 //        motorAon.setOnClickListener(this);
@@ -91,9 +117,32 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 //        Button rotateByTime = (Button)findViewById(R.id.rotatebytime);
 //        rotateByTime.setOnClickListener(this);
 
-//
-// (3);
     }
+
+    public class MainPagerAdapter extends FragmentStatePagerAdapter {
+
+        public MainPagerAdapter(FragmentManager fm) {super(fm);}
+
+        @Override
+        public Fragment getItem(int position) {
+
+            switch(position) {
+                case 0:
+                    return new NormalControllerFragment();
+                case 1:
+                    return new SuperControllerFragment();
+                case 2:
+                    return new CustomControllerFragment();
+            }
+            return null;
+        }
+
+        @Override
+        public int getCount() {
+            return 3;
+        }
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -301,8 +350,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE);
     }
 
-    @Override
-    public void onClick(View v) {
+//    @Override
+//    public void onClick(View v) {
 //        NumberPicker speedPicker = (NumberPicker)findViewById(R.id.speedPicker);
 //        int speed = speedPicker.getValue();
         int speed = 50;
@@ -313,52 +362,52 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 //        int time = timePicker.getValue();
         int time = 50;
 
-        switch (v.getId()) {
-            case R.id.buttonB:
-                goForward(speed);
-                break;
-            case R.id.motorACback:
-                goBackward(speed);
-                break;
-            case R.id.buttonA:
-                stopMove();
-                break;
-            // TODO startボタン処理
-            case R.id.startButton:
-                break;
-            // TODO selectボタン処理
-            case R.id.selectButton:
-                break;
-            case R.id.motorAon:
-                motorAon(speed);
-                break;
-            case R.id.motorAoff:
-                motorAoff();
-                break;
-            case R.id.motorCon:
-                motorCon(speed);
-                break;
-            case R.id.motorCoff:
-                motorCoff();
-                break;
-            case R.id.rotatebydegree:
-                rotateByDegree(speed, degree);
-                break;
-            case R.id.rotatebytime:
-                rotateByTime(speed,time);
-                break;
-            case R.id.readColorSensor:
-                readColorSensor(COLOR_SENSOR_PORT);
-                break;
-            case R.id.readTouchSensor:
-                readTouchSensor(TOUCH_SENSOR_PORT);
-                break;
-            case R.id.readUltrasonicSensor:
-                readUltrasonicSensor(USONIC_SENSOR_PORT);
-                break;
-        }
-
-    }
+//        switch (v.getId()) {
+//            case R.id.buttonB:
+//                goForward(speed);
+//                break;
+//            case R.id.motorACback:
+//                goBackward(speed);
+//                break;
+//            case R.id.buttonA:
+//                stopMove();
+//                break;
+//            // TODO startボタン処理
+//            case R.id.startButton:
+//                break;
+//            // TODO selectボタン処理
+//            case R.id.selectButton:
+//                break;
+//            case R.id.motorAon:
+//                motorAon(speed);
+//                break;
+//            case R.id.motorAoff:
+//                motorAoff();
+//                break;
+//            case R.id.motorCon:
+//                motorCon(speed);
+//                break;
+//            case R.id.motorCoff:
+//                motorCoff();
+//                break;
+//            case R.id.rotatebydegree:
+//                rotateByDegree(speed, degree);
+//                break;
+//            case R.id.rotatebytime:
+//                rotateByTime(speed,time);
+//                break;
+//            case R.id.readColorSensor:
+//                readColorSensor(COLOR_SENSOR_PORT);
+//                break;
+//            case R.id.readTouchSensor:
+//                readTouchSensor(TOUCH_SENSOR_PORT);
+//                break;
+//            case R.id.readUltrasonicSensor:
+//                readUltrasonicSensor(USONIC_SENSOR_PORT);
+//                break;
+//        }
+//
+//    }
 
     private Menu myMenu;
 

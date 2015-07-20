@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:background="#B1B1B2">
+
+    <LinearLayout
+        android:id="@+id/controller"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="L"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/button_lr"
+            style="?android:attr/borderlessButtonStyle"/>
+
+        <RelativeLayout
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/super_controller_out">
+
+            <Button
+                android:id="@+id/topBtn"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_above="@+id/centerImage"
+                android:layout_alignLeft="@+id/centerImage"
+                android:background="#535957"/>
+
+            <Button
+                android:id="@+id/rightBtn"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_toRightOf="@+id/centerImage"
+                android:layout_alignTop="@+id/centerImage"
+                android:background="#535957"/>
+
+            <Button
+                android:id="@+id/bottomBtn"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/centerImage"
+                android:layout_alignLeft="@+id/centerImage"
+                android:background="#535957"/>
+
+            <Button
+                android:id="@+id/leftBtn"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_toLeftOf="@+id/centerImage"
+                android:layout_alignTop="@+id/centerImage"
+                android:background="#535957"/>
+
+            <ImageView
+                android:id="@+id/centerImage"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerInParent="true"
+                android:background="#535957"/>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/buttonBottom"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="EV3 SUPER"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="5dp"
+            android:layout_marginBottom="50dp"
+            android:text="CONTROLLER"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:id="@+id/centerButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/startButton"
+                android:layout_width="0dp"
+                android:layout_height="15dp"
+                android:layout_weight="1"
+                android:layout_marginBottom="40dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_horizontal"
+                android:background="@drawable/button_label"
+                android:rotation="135"
+                style="?android:attr/borderlessButtonStyle"/>
+
+            <Button
+                android:id="@+id/selectButton"
+                android:layout_width="0dp"
+                android:layout_height="15dp"
+                android:layout_weight="1"
+                android:layout_marginBottom="40dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_horizontal"
+                android:background="@drawable/button_label"
+                android:rotation="135"
+                style="?android:attr/borderlessButtonStyle"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/centerText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/startText"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="START"/>
+
+            <TextView
+                android:id="@+id/selectText"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="SELECT"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/buttonRight"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="R"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/button_lr"
+            style="?android:attr/borderlessButtonStyle"/>
+
+        <RelativeLayout
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            android:gravity="center"
+            android:background="@drawable/super_button_out">
+
+            <LinearLayout
+                android:id="@+id/upButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginRight="50dp"
+                android:rotation="135"
+                android:background="@drawable/super_button_label">
+
+                <Button
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/super_button_green"
+                    style="?android:attr/borderlessButtonStyle"/>
+
+                <Button
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/super_button_bule"
+                    style="?android:attr/borderlessButtonStyle"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="50dp"
+                android:rotation="135"
+                android:layout_below="@+id/upButton"
+                android:background="@drawable/super_button_label">
+
+                <Button
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/super_button_yellow"
+                    style="?android:attr/borderlessButtonStyle"/>
+
+                <Button
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/super_button_red"
+                    style="?android:attr/borderlessButtonStyle"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
