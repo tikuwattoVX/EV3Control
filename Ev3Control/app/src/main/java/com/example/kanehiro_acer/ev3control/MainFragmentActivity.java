@@ -143,29 +143,29 @@ public class MainFragmentActivity extends FragmentActivity {
         }
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        if(!BluetoothAdapter.getDefaultAdapter().equals(null)){
-            //Bluetooth対応端末の場合の処理
-            Log.v("Bluetooth", "Bluetooth is supported");
-        }else{
-            //Bluetooth非対応端末の場合の処理
-            Log.v("Bluetooth","Bluetooth is not supported");
-            finish();
-        }
-        if (!BluetoothAdapter.getDefaultAdapter().isEnabled()) {
-            showToastShort(getResources().getString(R.string.wait_till_bt_on));
-            //  Bluetooth有効化ダイアログを表示
-            Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableIntent, REQUEST_ENABLE_BT);
-
-        } else {
-            Log.v("Bluetooth","Bluetooth is On");
-            selectEV3();
-        }
-    }
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//
+//        if(!BluetoothAdapter.getDefaultAdapter().equals(null)){
+//            //Bluetooth対応端末の場合の処理
+//            Log.v("Bluetooth", "Bluetooth is supported");
+//        }else{
+//            //Bluetooth非対応端末の場合の処理
+//            Log.v("Bluetooth","Bluetooth is not supported");
+//            finish();
+//        }
+//        if (!BluetoothAdapter.getDefaultAdapter().isEnabled()) {
+//            showToastShort(getResources().getString(R.string.wait_till_bt_on));
+//            //  Bluetooth有効化ダイアログを表示
+//            Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+//            startActivityForResult(enableIntent, REQUEST_ENABLE_BT);
+//
+//        } else {
+//            Log.v("Bluetooth","Bluetooth is On");
+//            selectEV3();
+//        }
+//    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {

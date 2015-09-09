@@ -1,14 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bootstrap="http://schemas.android.com/apk/res-auto"
+    xmlns:fontawesometext="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CustomControlerFragment"
-        android:textSize="30dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:background="#ffffff"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/display_text_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="体験会用"
+            android:textStyle="bold"
+            android:textSize="32sp"/>
+
+        <TextView
+            android:id="@+id/display_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CONTROLLER"
+            android:textStyle="bold"
+            android:textSize="32sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/start_switch"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <com.beardedhen.androidbootstrap.BootstrapButton
+                android:id="@+id/green_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="3秒前進して止まる"
+                android:layout_weight="1"
+                bootstrap:bb_icon_right="fa-truck"
+                bootstrap:bb_type="success"/>
+
+            <com.beardedhen.androidbootstrap.BootstrapButton
+                android:id="@+id/blue_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="壁に近づいたら止まる"
+                android:layout_weight="1"
+                bootstrap:bb_icon_right="fa-times"
+                bootstrap:bb_type="primary"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <com.beardedhen.androidbootstrap.BootstrapButton
+                android:id="@+id/yellow_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="黒くなったら止まる"
+                android:layout_weight="1"
+                bootstrap:bb_icon_right="fa-stop"
+                bootstrap:bb_type="warning"/>
+
+            <com.beardedhen.androidbootstrap.BootstrapButton
+                android:id="@+id/red_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="90度曲がる"
+                android:layout_weight="1"
+                bootstrap:bb_icon_right="fa-reply"
+                bootstrap:bb_type="danger"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>
